@@ -12,11 +12,15 @@ window_y = 480
 white = pygame.Color(255, 255, 255)
 red = pygame.Color(255, 0, 0)
 black = pygame.Color(0, 0, 0)
+green = pygame.Color(0, 255, 0)  # defining green color
  
 pygame.init()
  
 pygame.display.set_caption('Snake Game')
 game_window = pygame.display.set_mode((window_x, window_y))
+
+# Font settings
+score_font = pygame.font.Font(None, 35)
  
 clock = pygame.time.Clock()
 snake_position = [100, 50]
@@ -25,12 +29,13 @@ fruit_position = [random.randrange(1, (window_x//10)) * 10, random.randrange(1, 
 fruit_spawn = True
 direction = 'RIGHT'
 change_to = direction
+score = 0  # added score initialization
  
 def game_over():
     pygame.quit()
     quit()
 
-def score(score):
+def score_display(score):
     value = score_font.render('Your Score: ' + str(score), True, white)
     game_window.blit(value, [0, 0])
 
@@ -96,7 +101,7 @@ while True:
         if snake_position[0] == block[0] and snake_position[1] == block[1]:
             game_over()
  
-    show_score(1, white, 'consolas', 20)
+    score_display(score)  # changed to score_display
 
     pygame.display.update()
 
